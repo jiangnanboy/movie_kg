@@ -1,0 +1,13 @@
+{
+    "entity-data": {
+        "Person": "Person.csv",
+        "Movie": "Movie.csv",
+        "Country": "Country.csv"
+    },
+    "relation-data": {
+        "Movie|actor|Person": "actor.csv",
+        "Movie|composer|Person": "composer.csv",
+        "Movie|director|Person": "director.csv",
+        "Movie|district|Country": "district.csv"
+    }
+}
