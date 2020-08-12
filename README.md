@@ -27,7 +27,7 @@
     district 	    Movie 	    Country 	district.csv 	6227 	电影的制片国家/地区
 
 # cases
-１) 节点
+1)节点
 
 ![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/person.png)
 
@@ -36,7 +36,7 @@
 ![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/country.png)
 
 
-2) 关系
+2)关系
 
 ![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/actor.png)
 
