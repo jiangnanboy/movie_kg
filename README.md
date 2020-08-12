@@ -29,25 +29,26 @@
 # cases
 １) 节点
 
-![image](https://github.com/jiangnanboy/knowledge_graph/image/person.png)
+![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/person.png)
 
-![image](https://github.com/jiangnanboy/knowledge_graph/image/movie.png)
+![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/movie.png)
 
-![image](https://github.com/jiangnanboy/knowledge_graph/image/country.png)
+![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/country.png)
 
 
 2) 关系
 
-![image](https://github.com/jiangnanboy/knowledge_graph/image/actor.png)
+![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/actor.png)
 
-![image](https://github.com/jiangnanboy/knowledge_graph/image/composer.png)
+![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/composer.png)
 
-![image](https://github.com/jiangnanboy/knowledge_graph/image/director.png)
+![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/director.png)
 
-![image](https://github.com/jiangnanboy/knowledge_graph/image/district.png)
+![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/district.png)
 
 
 # references
 １）http://www.openkg.cn/dataset/douban-movie-kg
+
 ２）https://www.zmonster.me/2019/04/30/neo4j-introduction.html
 
