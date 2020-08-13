@@ -123,4 +123,35 @@ public class Search extends AbsGraph {
         return listRecord;
     }
 
+    /**
+     * 返回和name一起出演的明星名称和电影名称
+     * @param name
+     * @return
+     */
+    public List<Record> personActWithOthers(String name) {
+        List<Record> lisRecord = null;
+        try(Session session = driver.session()) {
+            lisRecord = session.readTransaction(tx ->
+                    tx.run("match(p:Person{name:$name})<-[:actor]-(m:Movie)-[:actor]->(other:Person) return m.title as title,other.name as name",
+                            Values.parameters("name", name))).list();
+        }
+        return lisRecord;
+    }
+
+    /**
+     * name1和name2共同出演的电影
+     * @param name1
+     * @param name2
+     * @return
+     */
+    public List<Record> moviesOfPersonActWithOthers(String name1, String name2) {
+        List<Record> lisRecord = null;
+        try(Session session = driver.session()) {
+            lisRecord = session.readTransaction(tx ->
+                    tx.run("match(p:Person{name:$name})<-[:actor]-(m:Movie)-[:actor]->(other:Person{name:$name}) return m.title as title",
+                            Values.parameters("name", name1, "name", name2))).list();
+        }
+        return lisRecord;
+    }
+
 }
