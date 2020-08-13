@@ -29,22 +29,22 @@
 # cases
 1)节点
 
-![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/person.png)
+![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/person.jpg)
 
-![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/movie.png)
+![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/movie.jpg)
 
-![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/country.png)
+![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/country.jpg)
 
 
 2)关系
 
-![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/actor.png)
+![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/actor.jpg)
 
-![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/composer.png)
+![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/composer.jpg)
 
-![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/director.png)
+![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/director.jpg)
 
-![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/district.png)
+![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/district.jpg)
 
 
 # references
