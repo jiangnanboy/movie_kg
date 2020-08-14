@@ -148,8 +148,8 @@ public class Search extends AbsGraph {
         List<Record> lisRecord = null;
         try(Session session = driver.session()) {
             lisRecord = session.readTransaction(tx ->
-                    tx.run("match(p:Person{name:$name})<-[:actor]-(m:Movie)-[:actor]->(other:Person{name:$name}) return m.title as title",
-                            Values.parameters("name", name1, "name", name2))).list();
+                    tx.run("match(p:Person{name:$pname})<-[:actor]-(m:Movie)-[:actor]->(other:Person{name:$oname}) return m.title as title",
+                            Values.parameters("pname", name1, "oname", name2))).list();
         }
         return lisRecord;
     }
