@@ -17,8 +17,8 @@ import java.util.List;
 public class Graph {
     static Driver driver = null;
     public static void main(String[] args) {
-        createNode(driver);
-        createRelation(driver);
+//        createNode(driver);
+//        createRelation(driver);
         search(driver);
         InitNeo4j.closeDriver();
 
@@ -70,7 +70,7 @@ public class Graph {
     public static void search(Driver driver) {
         Search search = new Search(driver);
         List<Record> listRecord = null;
-        listRecord = search.findPerson("刘德华");
+        /*listRecord = search.findPerson("刘德华");
         printListRecord(listRecord);
         listRecord = search.findMovie("独立日");
         printListRecord(listRecord);
@@ -84,7 +84,10 @@ public class Graph {
         printListRecord(listRecord);
         listRecord = search.movieDistrictByCountry("China_中国");
         printListRecord(listRecord);
-
+        listRecord = search.personActWithOthers("刘德华");
+        printListRecord(listRecord);*/
+        listRecord = search.moviesOfPersonActWithOthers("刘德华", "黎明");
+        printListRecord(listRecord);
     }
 
     /**
