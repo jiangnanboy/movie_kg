@@ -6,6 +6,7 @@ import org.neo4j.driver.v1.Record;
 import org.neo4j.driver.v1.Session;
 import org.neo4j.driver.v1.Values;
 
+import java.awt.image.renderable.RenderContext;
 import java.util.List;
 
 /**
@@ -154,4 +155,34 @@ public class Search extends AbsGraph {
         return lisRecord;
     }
 
+    /**
+     * name1与name2最短路径
+     * @param name1
+     * @param name2
+     * @return
+     */
+    public List<Record> shortestPathBetweenPerson(String name1, String name2) {
+        List<Record> listRecord = null;
+        try(Session session = driver.session()) {
+            listRecord = session.readTransaction(tx ->
+                    tx.run("match (m:Person{name:$mname}),(n:Person{name:$nname}),p=shortestpath((m)-[*..]-(n)) return p",
+                    Values.parameters("mname", name1, "nname", name2))).list();
+        }
+        return listRecord;
+    }
+
+    /**
+     * 返回类型为category，评分最高的前10部电影名称
+     * @param rating
+     * @param category
+     * @return
+     */
+    public List<Record> getMostRatedScoreMovie(float rating, String category) {
+        List<Record> listRecord = null;
+        try (Session session = driver.session()){
+            listRecord = session.readTransaction(tx ->
+                    tx.run("match (m:Movie) where m.rate>" + rating+ " and m.category=~'.*" + category+ ".*' return m.title order by m.rate desc limit 10")).list();
+        }
+        return listRecord;
+    }
 }
