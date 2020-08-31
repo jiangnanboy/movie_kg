@@ -1,22 +1,20 @@
 package com.sy.manipulation;
 
-import com.sy.base.abs.AbsGraph;
 import org.neo4j.driver.v1.Driver;
 import org.neo4j.driver.v1.Record;
 import org.neo4j.driver.v1.Session;
 import org.neo4j.driver.v1.Values;
 
-import java.awt.image.renderable.RenderContext;
 import java.util.List;
 
 /**
  * @Author Shi Yan
  * @Date 2020/8/7 16:00
  */
-public class Search extends AbsGraph {
-
+public class Search {
+    public Driver driver = null;
     public Search(Driver driver) {
-        super(driver);
+        this.driver = driver;
     }
 
     /**
@@ -185,4 +183,5 @@ public class Search extends AbsGraph {
         }
         return listRecord;
     }
+
 }

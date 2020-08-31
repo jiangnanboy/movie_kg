@@ -9,7 +9,9 @@ import java.util.Properties;
  * Created by YanShi on 2020/7/31 10:04 上午
  */
 public class PropertiesReader {
+
     private static Properties properties = new Properties();
+
     static {
         try {
             properties.load(new InputStreamReader(PropertiesReader.class.getClassLoader().getResourceAsStream("properties.properties"), "UTF-8"));

@@ -1,13 +1,13 @@
 package com.sy.node;
 
-import com.sy.base.abs.Node;
+import com.sy.base.abs.AbstractNode;
 
 import com.opencsv.bean.CsvBindByName;
 
 /**
  * Created by YanShi on 2020/7/30 4:00 下午
  */
-public class Person extends Node{
+public class Person extends AbstractNode {
     /**
      * "name","id:ID",":LABEL"
      */

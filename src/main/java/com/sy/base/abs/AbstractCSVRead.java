@@ -11,9 +11,9 @@ import java.util.Iterator;
 /**
  * Created by YanShi on 2020/7/31 10:34 上午
  */
-public abstract class AbsCSVRead {
+public abstract class AbstractCSVRead {
     public Driver driver = null;
-    public AbsCSVRead(Driver drive){this.driver = drive;}
+    public AbstractCSVRead(Driver drive){this.driver = drive;}
 
     /**
      * read csv file

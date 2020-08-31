@@ -1,6 +1,6 @@
 package com.sy.manipulation.cypher.csv;
 
-import com.sy.base.abs.AbsCSVRead;
+import com.sy.base.abs.AbstractCSVRead;
 import com.sy.node.Country;
 import com.sy.node.Movie;
 import com.sy.node.Person;
@@ -20,7 +20,7 @@ import java.util.Iterator;
 /**
  * Created by YanShi on 2020/7/24 9:22 上午
  */
-public class CreateNode extends AbsCSVRead {
+public class CreateNode extends AbstractCSVRead {
 
     public CreateNode(Driver drive) {
         super(drive);

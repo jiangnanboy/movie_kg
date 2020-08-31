@@ -14,12 +14,12 @@ import java.util.List;
 /**
  * Created by YanShi on 2020/7/24 1:11 下午
  */
-public class Graph {
+public class GraphBuild {
     static Driver driver = null;
     public static void main(String[] args) {
-//        createNode(driver);
-//        createRelation(driver);
-        search(driver);
+        createNode(driver);
+        createRelation(driver);
+        //search(driver);
         InitNeo4j.closeDriver();
 
     }
@@ -36,9 +36,9 @@ public class Graph {
      * @param driver
      */
     public static void createNode(Driver driver) {
-        String personEntityCsv = Graph.class.getClassLoader().getResource(PropertiesReader.get("personEntity")).getPath().substring(1);
-        String movieEntityCsv = Graph.class.getClassLoader().getResource(PropertiesReader.get("movieEntity")).getPath().substring(1);
-        String countryEntityCsv = Graph.class.getClassLoader().getResource(PropertiesReader.get("countryEntity")).getPath().substring(1);
+        String personEntityCsv = GraphBuild.class.getClassLoader().getResource(PropertiesReader.get("personEntity")).getPath().substring(1);
+        String movieEntityCsv = GraphBuild.class.getClassLoader().getResource(PropertiesReader.get("movieEntity")).getPath().substring(1);
+        String countryEntityCsv = GraphBuild.class.getClassLoader().getResource(PropertiesReader.get("countryEntity")).getPath().substring(1);
         String[] entities = {personEntityCsv, movieEntityCsv, countryEntityCsv};
         CreateNode createNode = new CreateNode(driver);
         createNode.createPersonNode(entities[0]);
@@ -51,10 +51,10 @@ public class Graph {
      * @param driver
      */
     public static void createRelation(Driver driver) {
-        String actorRelationCsv = Graph.class.getClassLoader().getResource(PropertiesReader.get("actorRelation")).getPath().substring(1);
-        String composerRelationCsv = Graph.class.getClassLoader().getResource(PropertiesReader.get("composerRelation")).getPath().substring(1);
-        String directorRelationCsv = Graph.class.getClassLoader().getResource(PropertiesReader.get("directorRelation")).getPath().substring(1);
-        String districtRelationCsv = Graph.class.getClassLoader().getResource(PropertiesReader.get("districtRelation")).getPath().substring(1);
+        String actorRelationCsv = GraphBuild.class.getClassLoader().getResource(PropertiesReader.get("actorRelation")).getPath().substring(1);
+        String composerRelationCsv = GraphBuild.class.getClassLoader().getResource(PropertiesReader.get("composerRelation")).getPath().substring(1);
+        String directorRelationCsv = GraphBuild.class.getClassLoader().getResource(PropertiesReader.get("directorRelation")).getPath().substring(1);
+        String districtRelationCsv = GraphBuild.class.getClassLoader().getResource(PropertiesReader.get("districtRelation")).getPath().substring(1);
         String[] relations = {actorRelationCsv, composerRelationCsv, directorRelationCsv, districtRelationCsv};
         CreateRelation createRelation = new CreateRelation(driver);
         createRelation.createActorRel(relations[0]);
@@ -70,23 +70,7 @@ public class Graph {
     public static void search(Driver driver) {
         Search search = new Search(driver);
         List<Record> listRecord = null;
-        /*listRecord = search.findPerson("刘德华");
-        printListRecord(listRecord);
-        listRecord = search.findMovie("独立日");
-        printListRecord(listRecord);
-        listRecord = search.findCountry("China_香港");
-        printListRecord(listRecord);
-        listRecord = search.movieActorByPerson("刘德华");
-        printListRecord(listRecord);
-        listRecord = search.movieComposerByPerson("迈克尔·阿恩特");
-        printListRecord(listRecord);
-        listRecord = search.movieDirectorByPerson("张艺谋");
-        printListRecord(listRecord);
-        listRecord = search.movieDistrictByCountry("China_中国");
-        printListRecord(listRecord);
-        listRecord = search.personActWithOthers("刘德华");
-        printListRecord(listRecord);*/
-        listRecord = search.moviesOfPersonActWithOthers("刘德华", "黎明");
+        listRecord = search.getMostRatedScoreMovie((float) 7.5, "科幻");
         printListRecord(listRecord);
     }
 

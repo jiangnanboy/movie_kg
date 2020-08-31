@@ -1,12 +1,12 @@
 package com.sy.node;
 
 import com.opencsv.bean.CsvBindByName;
-import com.sy.base.abs.Node;
+import com.sy.base.abs.AbstractNode;
 
 /**
  * Created by YanShi on 2020/7/30 4:00 下午
  */
-public class Movie extends Node {
+public class Movie extends AbstractNode {
     /**"title",
      * "url",
      * "cover",

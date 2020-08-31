@@ -1,6 +1,6 @@
 package com.sy.manipulation.cypher.csv;
 
-import com.sy.base.abs.AbsCSVRead;
+import com.sy.base.abs.AbstractCSVRead;
 
 import org.neo4j.driver.v1.*;
 
@@ -18,7 +18,7 @@ import com.sy.relation.District;
 /**
  * Created by YanShi on 2020/7/24 1:10 下午
  */
-public class CreateRelation extends AbsCSVRead {
+public class CreateRelation extends AbstractCSVRead {
 
     public CreateRelation(Driver driver) {super(driver);}
 

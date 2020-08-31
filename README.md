@@ -1,7 +1,7 @@
 # douban-movie-kg
 使用neo4j存储豆瓣电影的知识图谱，展示导演、编剧、演员与电影的关系。
 # introduction
-利用java-driver方式，使用cypher构建节点和关系。neo4j3.5.3,jdk8
+利用java-driver方式，使用cypher构建节点和关系。neo4j版本：3.5.3,jdk8
 # quick start
 	主测试函数\src\main\java\com\sy\mainclass\Graph.java中：
 	    //创建节点
@@ -13,7 +13,7 @@
 # data
     主要数据在resources中，数据中包含(数据来源http://www.openkg.cn/dataset/douban-movie-kg)
     
-    三类实体：
+    三类实体(节点)：
     实体类型 	数据文件 	数量 	说明
     Movie 	        Movie.csv 	4587 	电影实体
     Person 	        Person.csv 	22937 	人员实体
@@ -31,21 +31,9 @@
 
 ![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/person.jpg)
 
-![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/movie.jpg)
-
-![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/country.jpg)
-
-
 2)关系
 
 ![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/actor.jpg)
-
-![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/composer.jpg)
-
-![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/director.jpg)
-
-![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/district.jpg)
-
 
 # references
 
