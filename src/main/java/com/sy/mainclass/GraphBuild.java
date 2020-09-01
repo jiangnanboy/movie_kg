@@ -1,8 +1,8 @@
 package com.sy.mainclass;
 
 import com.sy.manipulation.Search;
-import com.sy.manipulation.cypher.csv.CreateNode;
-import com.sy.manipulation.cypher.csv.CreateRelation;
+import com.sy.manipulation.cypher.CreateNode;
+import com.sy.manipulation.cypher.CreateRelation;
 import com.sy.util.InitNeo4j;
 
 import com.sy.util.PropertiesReader;

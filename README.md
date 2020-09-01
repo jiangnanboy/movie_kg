@@ -3,6 +3,7 @@
 # introduction
     利用java-driver方式，使用cypher构建节点和关系。
     neo4j3.5.3
+    apoc3.5.0.13
     jdk8
 
 # quick start

@@ -1,4 +1,4 @@
-package com.sy.manipulation.cypher.csv;
+package com.sy.manipulation.cypher;
 
 import com.sy.base.abs.AbstractCSVRead;
 import com.sy.node.Country;
