@@ -1,7 +1,7 @@
 # douban-movie-kg
     存储豆瓣电影的知识图谱，展示导演、编剧、演员与电影的关系。
 # introduction
-    利用java-driver方式，使用cypher构建节点和关系。
+    利用java-driver方式，使用cypher和apoc构建节点和关系。
     neo4j3.5.3
     apoc3.5.0.13
     jdk8
