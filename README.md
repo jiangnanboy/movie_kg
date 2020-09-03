@@ -8,15 +8,21 @@
 
 # quick start
 
-	一.\src\main\java\com\sy\mainclass\GraphBuild.java：
-	    1.创建节点
+	一.cypher构建node与relation 
+	    \src\main\java\com\sy\mainclass\GraphCypherBuild.java
+	    1.构建节点
 	    createNode(driver);
-	    2.创建关系
+	    2.构建关系
         createRelation(driver);
-        3.一些简单的搜索
-        search(driver);
         
-    二.\src\main\java\com\sy\mainclass\MovieQA.java
+    二.apoc批量构建node与relation
+        \src\main\java\com\sy\mainclass\GraphApocBuild.java
+        1.构建节点
+        createNode(driver);
+        2.构建关系
+        createRelation(driver);
+        
+    三.\src\main\java\com\sy\mainclass\MovieQA.java
     
 # data
 

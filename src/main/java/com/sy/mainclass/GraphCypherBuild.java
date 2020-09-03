@@ -19,7 +19,6 @@ public class GraphCypherBuild {
     public static void main(String[] args) {
         createNode(driver);
         createRelation(driver);
-        //search(driver);
         InitNeo4j.closeDriver();
 
     }
