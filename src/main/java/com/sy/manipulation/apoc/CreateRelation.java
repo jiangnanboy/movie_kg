@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
  * Created by YanShi on 2020/7/24 1:10 下午
  */
 public class CreateRelation {
-    private static Logger LOGGER = LoggerFactory.getLogger(CreateNode.class);
 
     private Driver driver = null;
 
@@ -34,10 +33,8 @@ public class CreateRelation {
                     "{batchSize:1000,iterateList:true, parallel:true});")).summary();
         } catch(Exception e) {
             e.printStackTrace();
-            LOGGER.error(e.getMessage(), e);
         }
         System.out.println("create relation of " + relType + " done!");
-        LOGGER.info("create relation of " + relType + " done!");
         return summary.counters().relationshipsCreated() == 1;
     }
 
