@@ -1,9 +1,9 @@
 package com.sy.manipulation.cypher;
 
 import com.sy.base.abs.AbstractCSVRead;
-import com.sy.node.Country;
-import com.sy.node.Movie;
-import com.sy.node.Person;
+import com.sy.manipulation.cypher.node.Country;
+import com.sy.manipulation.cypher.node.Movie;
+import com.sy.manipulation.cypher.node.Person;
 
 import org.neo4j.driver.v1.Driver;
 import org.neo4j.driver.v1.Session;

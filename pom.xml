@@ -20,16 +20,15 @@
         <groupId>org.neo4j.driver</groupId>
         <artifactId>neo4j-java-driver</artifactId>
         <version>1.7.1</version>
-        <scope>provided</scope>
+        <scope>compile</scope>
     </dependency>
 
     <dependency>
         <groupId>com.opencsv</groupId>
         <artifactId>opencsv</artifactId>
         <version>4.2</version>
-        <scope>provided</scope>
+        <scope>compile</scope>
     </dependency>
-
 
 </dependencies>
 </project>

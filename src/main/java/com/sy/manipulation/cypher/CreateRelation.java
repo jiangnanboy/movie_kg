@@ -10,10 +10,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Iterator;
 
-import com.sy.relation.Actor;
-import com.sy.relation.Composer;
-import com.sy.relation.Director;
-import com.sy.relation.District;
+import com.sy.manipulation.cypher.relation.Actor;
+import com.sy.manipulation.cypher.relation.Composer;
+import com.sy.manipulation.cypher.relation.Director;
+import com.sy.manipulation.cypher.relation.District;
 
 /**
  * Created by YanShi on 2020/7/24 1:10 下午
