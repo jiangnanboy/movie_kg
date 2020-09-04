@@ -17,6 +17,12 @@
     </dependency>
 
     <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.30</version>
+    </dependency>
+
+    <dependency>
         <groupId>org.neo4j.driver</groupId>
         <artifactId>neo4j-java-driver</artifactId>
         <version>1.7.1</version>
@@ -28,6 +34,25 @@
         <artifactId>opencsv</artifactId>
         <version>4.2</version>
         <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>edu.stanford.nlp</groupId>
+        <artifactId>stanford-corenlp</artifactId>
+        <version>4.0.0</version>
+    </dependency>
+    <dependency>
+        <groupId>edu.stanford.nlp</groupId>
+        <artifactId>stanford-corenlp</artifactId>
+        <version>4.0.0</version>
+        <classifier>models</classifier>
+    </dependency>
+
+    <dependency>
+        <groupId>edu.stanford.nlp</groupId>
+        <artifactId>stanford-corenlp</artifactId>
+        <version>4.0.0</version>
+        <classifier>models-chinese</classifier>
     </dependency>
 
 </dependencies>

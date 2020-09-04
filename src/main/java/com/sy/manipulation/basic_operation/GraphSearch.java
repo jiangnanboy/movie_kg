@@ -11,9 +11,9 @@ import java.util.List;
  * @Author Shi Yan
  * @Date 2020/8/7 16:00
  */
-public class Search {
+public class GraphSearch {
     public Driver driver = null;
-    public Search(Driver driver) {
+    public GraphSearch(Driver driver) {
         this.driver = driver;
     }
 

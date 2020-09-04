@@ -1,6 +1,6 @@
 package com.sy.mainclass;
 
-import com.sy.manipulation.basic_operation.Search;
+import com.sy.manipulation.basic_operation.GraphSearch;
 import com.sy.manipulation.cypher.CreateNode;
 import com.sy.manipulation.cypher.CreateRelation;
 import com.sy.util.InitNeo4j;
@@ -67,7 +67,7 @@ public class GraphCypherBuild {
      * @param driver
      */
     public static void search(Driver driver) {
-        Search search = new Search(driver);
+        GraphSearch search = new GraphSearch(driver);
         List<Record> listRecord = null;
         listRecord = search.getMostRatedScoreMovie((float) 7.5, "科幻");
         printListRecord(listRecord);

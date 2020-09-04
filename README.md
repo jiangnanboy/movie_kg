@@ -1,5 +1,5 @@
 # douban-movie-kg
-    存储豆瓣电影的知识图谱，展示导演、编剧、演员与电影的关系。
+    存储豆瓣电影知识图谱，展示导演、编剧、演员与电影的关系。
 # introduction
     利用java-driver方式，使用cypher构建节点和关系。
     neo4j3.5.3
@@ -36,10 +36,10 @@
     
     四类关系：
     关系类型 	主语实体类型 	宾语实体类型 	数据文件 	数量 	说明
-    actor 	            Movie 	    Person 	actor.csv 	35257 	电影的主演
-    composer 	    Movie 	    Person 	composer.csv 	8345 	电影的编剧
-    director 	    Movie 	    Person 	director.csv 	5015 	电影的导演
-    district 	    Movie 	    Country 	district.csv 	6227 	电影的制片国家/地区
+    ACTOR_OF 	    Movie 	    Person 	actor.csv 	35257 	电影的主演
+    COMPOSER_OF 	    Movie 	    Person 	composer.csv 	8345 	电影的编剧
+    DIRECTOR_OF 	    Movie 	    Person 	director.csv 	5015 	电影的导演
+    DISTRICT_OF 	    Movie 	    Country 	district.csv 	6227 	电影的制片国家/地区
 
 # cases
 
