@@ -26,7 +26,7 @@ public class CreateNode {
      * @return
      */
     public void createNode(String file, String nodeLabel) {
-        System.out.println("start create node of " + nodeLabel);
+        System.out.println("start create node of " + nodeLabel + "...");
         try(Session session = driver.session()) {
             session.writeTransaction(tx -> tx.run(" call apoc.periodic.iterate(" +
                     "'call apoc.load.csv(\"" + file + "\",{header:true,sep:\",\",ignore:[\"label\"]}) yield map as row return row'," +

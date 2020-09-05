@@ -25,12 +25,12 @@ public class CreateRelation {
      */
     public boolean createRelation(String file, String startNodeLabel, String endNodeLabel, String relType) {
         ResultSummary summary = null;
-        System.out.println("start create relation of " + relType);
+        System.out.println("start create relation of " + relType + "...");
         try (Session session = driver.session()){
             summary = session.writeTransaction(tx -> tx.run("call apoc.periodic.iterate(" +
                     "'call apoc.load.csv(\""+ file + "\",{header:true,sep:\",\",ignore:[\"type\"]}) yield map as row match (start:" + startNodeLabel + "{id:row.startId}), (end:" + endNodeLabel + "{id:row.endId}) return start,end'," +
                     "'create (start)-[:" + relType + "]->(end)'," +
-                    "{batchSize:1000,iterateList:true, parallel:true});")).summary();
+                    "{batchSize:1000,iterateList:true, parallel:false});")).summary(); //这里注意parallel为false，保证在创建节点之间关系时不会产生死锁问题
         } catch(Exception e) {
             e.printStackTrace();
         }
