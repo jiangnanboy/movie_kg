@@ -5,6 +5,7 @@
     neo4j3.5.3
     apoc3.5.0.13
     jdk8
+    hanlp1.7.7 下载data(包括dictionary和model，配置hanlp.properties路径)放在resources目录下即可
 
 # quick start
 
@@ -23,6 +24,7 @@
         createRelation(driver);
         
     三.\src\main\java\com\sy\mainclass\MovieQA.java
+        1.提取问答语句中的实体，包括人名和电影名
     
 # data
 

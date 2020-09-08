@@ -37,22 +37,9 @@
     </dependency>
 
     <dependency>
-        <groupId>edu.stanford.nlp</groupId>
-        <artifactId>stanford-corenlp</artifactId>
-        <version>4.0.0</version>
-    </dependency>
-    <dependency>
-        <groupId>edu.stanford.nlp</groupId>
-        <artifactId>stanford-corenlp</artifactId>
-        <version>4.0.0</version>
-        <classifier>models</classifier>
-    </dependency>
-
-    <dependency>
-        <groupId>edu.stanford.nlp</groupId>
-        <artifactId>stanford-corenlp</artifactId>
-        <version>4.0.0</version>
-        <classifier>models-chinese</classifier>
+        <groupId>com.hankcs</groupId>
+        <artifactId>hanlp</artifactId>
+        <version>portable-1.7.7</version>
     </dependency>
 
 </dependencies>
