@@ -47,7 +47,7 @@
 
 # graph可视化
 
-节点
+关系图
 
 ![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/movie_graph.png)
 
