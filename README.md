@@ -1,33 +1,35 @@
 # douban-movie-kg
-    存储豆瓣电影知识图谱，展示导演、编剧、演员与电影的关系。
+    存储豆瓣电影知识图谱，展示导演、编剧、演员与电影的关系。利用spark和neo4j完成简易问答。
+    
 # introduction
-    利用java-driver方式，使用cypher和apoc构建节点和关系。
-    neo4j3.5.3
-    apoc3.5.0.13
-    jdk8
-    hanlp1.7.7 下载data(包括dictionary和model，配置hanlp.properties路径)放在resources目录下即可
+    利用java-driver方式，使用cypher和apoc构建节点和关系，使用spark完成问句分类。
+    1.neo4j3.5.3
+    2.apoc3.5.0.13
+    3.jdk1.8
+    4.hanlp1.7.7 下载data(包括dictionary和model，配置hanlp.properties路径)放在resources目录下即可
+    5.spark3.0
 
 # quick start
-
-	一.cypher构建node与relation 
+	一.cypher构建node与relation(较慢，一个一个语句create)
 	    \src\main\java\com\sy\mainclass\GraphCypherBuild.java
 	    1.构建节点
 	    createNode(driver);
 	    2.构建关系
         createRelation(driver);
         
-    二.apoc批量构建node与relation
+    二.apoc批量构建node与relation(建议利用apoc构建，不需要stop neo4j，速度和数据量中等)
         \src\main\java\com\sy\mainclass\GraphApocBuild.java
         1.构建节点
         createNode(driver);
         2.构建关系
         createRelation(driver);
         
-    三.\src\main\java\com\sy\mainclass\MovieQA.java
-        1.提取问答语句中的实体，包括人名和电影名
+    三.\src\main\java\com\sy\mainclass\MovieQA.java(问答部分，问句分类和模板匹配，并转为查询语句)
+        1.对问句进行分类和模板匹配
+        2.提取问答语句中的实体，包括人名和电影名
+        3.将问句模板和提取的实体转为cypher或apoc语句进行查询
     
 # data
-
     主要数据在resources中，数据中包含(数据来源http://www.openkg.cn/dataset/douban-movie-kg)
     
     三类实体(节点)：
@@ -43,15 +45,11 @@
     DIRECTOR_OF 	    Movie 	    Person 	director.csv 	5015 	电影的导演
     DISTRICT_OF 	    Movie 	    Country 	district.csv 	6227 	电影的制片国家/地区
 
-# cases
+# graph可视化
 
-1)节点
+节点
 
-![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/person.jpg)
-
-2)关系
-
-![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/actor.jpg)
+![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/movie_graph.png)
 
 # references
 
