@@ -1,5 +1,5 @@
 # douban-movie-kg
-    存储豆瓣电影知识图谱，展示导演、编剧、演员与电影的关系。利用spark和neo4j完成简易问答。
+    存储豆瓣电影知识图谱，展示导演、编剧、演员与电影的关系。利用spark和neo4j完成一个简易的电影问答程序。
     
 # introduction
     利用java-driver方式，使用cypher和apoc构建节点和关系，使用spark完成问句分类。
@@ -24,8 +24,8 @@
         2.构建关系
         createRelation(driver);
         
-    三.\src\main\java\com\sy\mainclass\MovieQA.java(问答部分，问句分类和模板匹配，并转为查询语句)
-        1.对问句进行分类和模板匹配
+    三.\src\main\java\com\sy\mainclass\MovieQA.java(问答部分，问句意图识别和模板匹配，并转为查询语句)
+        1.对问句进行意图分类和模板匹配
         2.提取问答语句中的实体，包括人名和电影名
         3.将问句模板和提取的实体转为cypher或apoc语句进行查询
     
