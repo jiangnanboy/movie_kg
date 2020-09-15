@@ -18,4 +18,9 @@ public class QuestionAnswer {
             System.out.println(term.word+" : "+term.nature.toString());
         }
     }
+
+    public void response(String question) {
+
+    }
+
 }
