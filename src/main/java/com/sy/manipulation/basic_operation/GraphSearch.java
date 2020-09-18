@@ -18,6 +18,109 @@ public class GraphSearch {
     }
 
     /**
+     * 查询电影评分
+     * @param title
+     * @return
+     */
+    public List<Record> movieRate(String title) {
+        List<Record> listRecord = null;
+        try(Session session = driver.session()) {
+            listRecord = session.readTransaction(tx -> tx.run("match (m:Movie) where m.title = $title return m.rate",
+                    Values.parameters("title", title))).list();
+        }
+        return listRecord;
+    }
+
+    /**
+     * 查询电影上映时间
+     * @param title
+     * @return
+     */
+    public List<Record> movieShowtime(String title) {
+        List<Record> listRecord = null;
+        try(Session session = driver.session()) {
+            listRecord = session.readTransaction(tx -> tx.run("match (m:Movie) where m.title = $title return m.showtime",
+                    Values.parameters("title", title))).list();
+        }
+        return listRecord;
+    }
+
+    /**
+     * 查询电影类型
+     * @param title
+     * @return
+     */
+    public List<Record> movieCategory(String title) {
+        List<Record> listRecord = null;
+        try(Session session = driver.session()) {
+            listRecord = session.readTransaction(tx -> tx.run("match (m:Movie) where m.title = $title return m.category",
+                    Values.parameters("title", title))).list();
+        }
+        return listRecord;
+    }
+
+    /**
+     * 查询参演该电影的演员
+     * @param title
+     * @return
+     */
+    public List<Record> movieActorOfAllPerson(String title) {
+        List<Record> listRecord = null;
+        try(Session session = driver.session()) {
+            listRecord = session.readTransaction(tx -> tx.run("MATCH path=(m:Movie)-[r:ACTOR_OF]->(p:Person) where m.title = $title return p",
+                    Values.parameters("title", title))).list();
+        }
+        return listRecord;
+    }
+
+    /**
+     * 演员参的类型为category的电影
+     * @param person
+     * @param category
+     * @return
+     */
+    public List<Record> personActorOfCategoryMovie(String person, String category) {
+        List<Record> listRecord = null;
+        try(Session session = driver.session()) {
+            listRecord = session.readTransaction(tx -> tx.run("MATCH path=(m:Movie)-[r:ACTOR_OF]->(p:Person) where p.name=$name and m.category =~'.*{category}.*' return m.title",
+                    Values.parameters("name", person, "category", category))).list();
+        }
+        return listRecord;
+    }
+
+    /**
+     * 返回演员为person参演的评分高于rating的电影影名称
+     * @param person
+     * @param rating
+     * @return
+     */
+    public List<Record> getAboveScorePersonActorOfMovie(String person, float rating) {
+        List<Record> listRecord = null;
+        try (Session session = driver.session()){
+            listRecord = session.readTransaction(tx ->
+                    tx.run("match (m:Movie)-[:ACTOR_OF]->(p:Person) where m.rate>$rate and p.name=~'.*{person}.*' return m.title",
+                            Values.parameters("rate", rating, "person", person))).list();
+        }
+        return listRecord;
+    }
+
+    /**
+     * 返回演员为person参演的评分低于rating的电影影名称
+     * @param person
+     * @param rating
+     * @return
+     */
+    public List<Record> getBelowScorePersonActorOfMovie(String person, float rating) {
+        List<Record> listRecord = null;
+        try (Session session = driver.session()){
+            listRecord = session.readTransaction(tx ->
+                    tx.run("match (m:Movie)-[:ACTOR_OF]->(p:Person) where m.rate<$rate and p.name=~'.*{person}.*' return m.title",
+                            Values.parameters("rate", rating, "person", person))).list();
+        }
+        return listRecord;
+    }
+
+    /**
      * 查找名为name的person信息
      * @param name
      * @return
@@ -71,14 +174,44 @@ public class GraphSearch {
         List<Record> listRecord = null;
         try (Session session = driver.session()){
             listRecord = session.readTransaction(tx ->
-                    tx.run("match(m:Movie)-[:actor]->(p:Person{name:$name}) return p.name as name,m.title as title",
+                    tx.run("match(m:Movie)-[:ACTOR_OF]->(p:Person{name:$name}) return m.title as title",
                             Values.parameters("name", name))).list();
         }
         return listRecord;
     }
 
     /**
-     * 查询名为namer person创作的电影
+     * 查询名为name的person参演的电影数量
+     * @param name
+     * @return
+     */
+    public List<Record> getCountMovieActorByPerson(String name) {
+        List<Record> listRecord = null;
+        try (Session session = driver.session()){
+            listRecord = session.readTransaction(tx ->
+                    tx.run("match(m:Movie)-[:ACTOR_OF]->(p:Person) where p.name = $name return count(m)",
+                            Values.parameters("name", name))).list();
+        }
+        return listRecord;
+    }
+
+    /**
+     * 查询名为name的person参演的电影类型(风格)
+     * @param name
+     * @return
+     */
+    public List<Record> getCategoryOfMovieActorByPerson(String name) {
+        List<Record> listRecord = null;
+        try (Session session = driver.session()){
+            listRecord = session.readTransaction(tx ->
+                    tx.run("match(m:Movie)-[:ACTOR_OF]->(p:Person{name:$name}) return m.category as category",
+                            Values.parameters("name", name))).list();
+        }
+        return listRecord;
+    }
+
+    /**
+     * 查询名为name person创作的电影
      * @param name
      * @return
      */
@@ -131,7 +264,7 @@ public class GraphSearch {
         List<Record> lisRecord = null;
         try(Session session = driver.session()) {
             lisRecord = session.readTransaction(tx ->
-                    tx.run("match(p:Person{name:$name})<-[:actor]-(m:Movie)-[:actor]->(other:Person) return m.title as title,other.name as name",
+                    tx.run("match(p:Person{name:$name})<-[:ACTOR_OF]-(m:Movie)-[:ACTOR_OF]->(other:Person) return m.title as title,other.name as name",
                             Values.parameters("name", name))).list();
         }
         return lisRecord;
@@ -143,11 +276,11 @@ public class GraphSearch {
      * @param name2
      * @return
      */
-    public List<Record> moviesOfPersonActWithOthers(String name1, String name2) {
+    public List<Record> getMoviesOfPersonActWithOthers(String name1, String name2) {
         List<Record> lisRecord = null;
         try(Session session = driver.session()) {
             lisRecord = session.readTransaction(tx ->
-                    tx.run("match(p:Person{name:$pname})<-[:actor]-(m:Movie)-[:actor]->(other:Person{name:$oname}) return m.title as title",
+                    tx.run("match(p:Person{name:$pname})<-[:ACTOR_OF]-(m:Movie)-[:ACTOR_OF]->(other:Person{name:$oname}) return m.title as title",
                             Values.parameters("pname", name1, "oname", name2))).list();
         }
         return lisRecord;
