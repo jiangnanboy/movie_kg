@@ -1,8 +1,8 @@
 package com.sy.qa;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,15 +11,12 @@ import com.hankcs.hanlp.seg.Segment;
 import com.hankcs.hanlp.seg.common.Term;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.function.FlatMapFunction;
-import org.apache.spark.api.java.function.MapPartitionsFunction;
 import org.apache.spark.ml.Pipeline;
 import org.apache.spark.ml.PipelineModel;
 import org.apache.spark.ml.PipelineStage;
 import org.apache.spark.ml.classification.NaiveBayes;
-import org.apache.spark.ml.classification.NaiveBayesModel;
 import org.apache.spark.ml.feature.HashingTF;
 import org.apache.spark.ml.feature.IDF;
-import org.apache.spark.ml.feature.IDFModel;
 import org.apache.spark.ml.feature.Tokenizer;
 import org.apache.spark.sql.*;
 import org.apache.spark.sql.types.DataTypes;
@@ -27,14 +24,11 @@ import org.apache.spark.sql.types.Metadata;
 import org.apache.spark.sql.types.StructField;
 import org.apache.spark.sql.types.StructType;
 
-import javax.sql.DataSource;
-
-
 /**
  * @author YanShi
  * @date 2020/9/9 22:06
  */
-public class QuestionClassification {
+public class QuestionClassification implements Serializable {
 
     SparkSession session = null;
     Segment segment = null;
@@ -108,9 +102,11 @@ public class QuestionClassification {
         PipelineModel model = pipeline.fit(dataset);
         try {
             model.save(modelFile);
+            System.out.println("model save to : " + modelFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     /**
@@ -124,7 +120,7 @@ public class QuestionClassification {
                 new StructField("sentence", DataTypes.StringType, false, Metadata.empty())
         });
         List<Row> predictRow = new ArrayList<>();
-        predictRow.add(RowFactory.create(sentenceSegment(text)));
+        predictRow.add(RowFactory.create(text));
         Dataset<Row> prediction = session.createDataFrame(predictRow, schema);
         PipelineModel model = PipelineModel.load(modelFile);
         Dataset<Row> predictions = model.transform(prediction);

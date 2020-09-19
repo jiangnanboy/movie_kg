@@ -146,7 +146,6 @@ public class QuestionAnswer {
                             movieOtherStar = term.word;
                             break;
                         }
-
                     }
                 }
                 result = graphSearch.getMoviesOfPersonActWithOthers(movieStar, movieOtherStar);

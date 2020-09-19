@@ -16,7 +16,6 @@ public class GraphCount {
         this.driver = driver;
     }
 
-
     /**
      * 统计label为nodeLabel的节点数量
      * @param nodeLabel

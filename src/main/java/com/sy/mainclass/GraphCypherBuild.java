@@ -15,19 +15,11 @@ import java.util.List;
  * Created by YanShi on 2020/7/24 1:11 下午
  */
 public class GraphCypherBuild {
-    static Driver driver = null;
     public static void main(String[] args) {
-        createNode(driver);
-        createRelation(driver);
+        createNode(InitNeo4j.getDriver());
+        createRelation(InitNeo4j.getDriver());
         InitNeo4j.closeDriver();
 
-    }
-
-    static {
-        String url = PropertiesReader.get("url");
-        String name = PropertiesReader.get("name");
-        String password = PropertiesReader.get("password");
-        driver = InitNeo4j.initDriver(url, name, password);
     }
 
     /**
@@ -35,9 +27,9 @@ public class GraphCypherBuild {
      * @param driver
      */
     public static void createNode(Driver driver) {
-        String personEntityCsv = GraphCypherBuild.class.getClassLoader().getResource(PropertiesReader.get("personEntity")).getPath().substring(1);
-        String movieEntityCsv = GraphCypherBuild.class.getClassLoader().getResource(PropertiesReader.get("movieEntity")).getPath().substring(1);
-        String countryEntityCsv = GraphCypherBuild.class.getClassLoader().getResource(PropertiesReader.get("countryEntity")).getPath().substring(1);
+        String personEntityCsv = PropertiesReader.get("personEntity");
+        String movieEntityCsv = PropertiesReader.get("movieEntity");
+        String countryEntityCsv = PropertiesReader.get("countryEntity");
         String[] entities = {personEntityCsv, movieEntityCsv, countryEntityCsv};
         CreateNode createNode = new CreateNode(driver);
         createNode.createPersonNode(entities[0]);
@@ -50,10 +42,10 @@ public class GraphCypherBuild {
      * @param driver
      */
     public static void createRelation(Driver driver) {
-        String actorRelationCsv = GraphCypherBuild.class.getClassLoader().getResource(PropertiesReader.get("actorRelation")).getPath().substring(1);
-        String composerRelationCsv = GraphCypherBuild.class.getClassLoader().getResource(PropertiesReader.get("composerRelation")).getPath().substring(1);
-        String directorRelationCsv = GraphCypherBuild.class.getClassLoader().getResource(PropertiesReader.get("directorRelation")).getPath().substring(1);
-        String districtRelationCsv = GraphCypherBuild.class.getClassLoader().getResource(PropertiesReader.get("districtRelation")).getPath().substring(1);
+        String actorRelationCsv = PropertiesReader.get("actorRelation");
+        String composerRelationCsv = PropertiesReader.get("composerRelation");
+        String directorRelationCsv = PropertiesReader.get("directorRelation");
+        String districtRelationCsv = PropertiesReader.get("districtRelation");
         String[] relations = {actorRelationCsv, composerRelationCsv, directorRelationCsv, districtRelationCsv};
         CreateRelation createRelation = new CreateRelation(driver);
         createRelation.createActorRel(relations[0]);

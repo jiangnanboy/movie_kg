@@ -13,19 +13,10 @@ import org.neo4j.driver.v1.Driver;
  * Created by YanShi on 2020/7/24 1:10 下午
  */
 public class GraphApocBuild {
-
-    static Driver driver = null;
     public static void main(String[] args) {
-        createNode(driver);
-        createRelation(driver);
+        createNode(InitNeo4j.getDriver());
+        createRelation(InitNeo4j.getDriver());
         InitNeo4j.closeDriver();
-    }
-
-    static {
-        String url = PropertiesReader.get("url");
-        String name = PropertiesReader.get("name");
-        String password = PropertiesReader.get("password");
-        driver = InitNeo4j.initDriver(url, name, password);
     }
 
     /**

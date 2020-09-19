@@ -7,7 +7,9 @@ import org.neo4j.driver.v1.*;
  */
 public class InitNeo4j {
     private static Driver driver = null;
-
+    static String url = null;
+    static String name = null;
+    static String password = null;
     /**
      * 初始化 driver
      * @param url
@@ -15,7 +17,7 @@ public class InitNeo4j {
      * @param password
      * @return
      */
-    public static Driver initDriver(String url, String name, String password) {
+    private static Driver initDriver(String url, String name, String password) {
         if(null == driver) {
             driver = GraphDatabase.driver(url, AuthTokens.basic(name, password));
         }
@@ -29,6 +31,17 @@ public class InitNeo4j {
         if(null != driver) {
             driver.close();
         }
+    }
+
+    public static Driver getDriver() {
+        return driver;
+    }
+
+    static {
+        url = PropertiesReader.get("url");
+        name = PropertiesReader.get("name");
+        password = PropertiesReader.get("password");
+        driver = InitNeo4j.initDriver(url, name, password);
     }
 
 }
