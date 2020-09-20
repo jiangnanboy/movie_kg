@@ -6,6 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import org.neo4j.driver.v1.Driver;
 import org.neo4j.driver.v1.Record;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public class QuestionAnswer {
      * @param label
      * @param listTerm
      */
-    public List<Record> response(int label, List<Term> listTerm) {
+    public List<String> response(double label, List<Term> listTerm) {
         /**【nm：电影名，nnt：演员名，ng：电影类型】
          * 0:nm 评分
          * 1:nm 上映时间
@@ -40,6 +41,7 @@ public class QuestionAnswer {
          * 12:nnt 电影数量
          * 13:nnt 出生日期 (暂时没数据)
          */
+        List<String> responseResult = new ArrayList<>();
         List<Record> result = null;
         String movieTitle = null; // 电影名称
         String movieShowtime = null; // 电影上映时间
@@ -48,48 +50,57 @@ public class QuestionAnswer {
         String movieOtherStar = null; //另一个演员
         float rate = 0.0f; //评分
         GraphSearch graphSearch = new GraphSearch(driver);
-        switch (label) {
-            case 0:
+        String questionType = String.valueOf(label);
+        switch (questionType) {
+            case "0.0":
                 for(Term term : listTerm) {
                     if(StringUtils.equals(term.nature.toString(), "nm")) {
                         movieTitle = term.word;
                         break;
                     }
                 }
-                result = graphSearch.movieRate(movieTitle);
+                for(Record record : graphSearch.movieRate(movieTitle)) {
+                    responseResult.add(record.get("rate").toString());
+                }
                 break;
-            case 1:
+            case "1.0":
                 for(Term term : listTerm) {
                     if(StringUtils.equals(term.nature.toString(), "nm")) {
                         movieTitle = term.word;
                         break;
                     }
                 }
-                result = graphSearch.movieShowtime(movieTitle);
+                for(Record record : graphSearch.movieShowtime(movieTitle)) {
+                    responseResult.add(record.get("showtime").toString());
+                }
                 break;
-            case 2:
+            case "2.0":
                 for(Term term : listTerm) {
                     if(StringUtils.equals(term.nature.toString(), "nm")) {
                         movieTitle = term.word;
                         break;
                     }
                 }
-                result = graphSearch.movieCategory(movieTitle);
+                for(Record record : graphSearch.movieCategory(movieTitle)) {
+                    responseResult.add(record.get("category").toString());
+                }
                 break;
-            case 3: //(暂时没数据)
+            case "3.0": //(暂时没数据)
                 break;
-            case 4:
+            case "4.0":
                 for(Term term : listTerm) {
                     if(StringUtils.equals(term.nature.toString(), "nm")) {
                         movieTitle = term.word;
                         break;
                     }
                 }
-                result = graphSearch.movieActorOfAllPerson(movieTitle);
+                for(Record record : graphSearch.movieActorOfAllPerson(movieTitle)) {
+                    responseResult.add(record.get("name").toString());
+                }
                 break;
-            case 5: //(暂时没数据)
+            case "5.0": //(暂时没数据)
                 break;
-            case 6:
+            case "6.0":
                 for(Term term : listTerm) {
                     if(StringUtils.equals(term.nature.toString(), "nnt")) {
                         movieStar = term.word;
@@ -97,18 +108,22 @@ public class QuestionAnswer {
                         movieCategory = term.word;
                     }
                 }
-                result = graphSearch.personActorOfCategoryMovie(movieStar, movieCategory);
+                for(Record record : graphSearch.personActorOfCategoryMovie(movieStar, movieCategory)){
+                    responseResult.add(record.get("title").toString());
+                }
                 break;
-            case 7:
+            case "7.0":
                 for(Term term : listTerm) {
                     if(StringUtils.equals(term.nature.toString(), "nnt")) {
                         movieStar = term.word;
                         break;
                     }
                 }
-                result = graphSearch.movieActorByPerson(movieStar);
+                for(Record record : graphSearch.movieActorByPerson(movieStar)) {
+                    responseResult.add(record.get("title").toString());
+                }
                 break;
-            case 8:
+            case "8.0":
                 for(Term term : listTerm) {
                     if(StringUtils.equals(term.nature.toString(), "nnt")) {
                         movieStar = term.word;
@@ -116,9 +131,11 @@ public class QuestionAnswer {
                         rate = Float.parseFloat(term.word);
                     }
                 }
-                result = graphSearch.getAboveScorePersonActorOfMovie(movieStar, rate);
+                for(Record record : graphSearch.getAboveScorePersonActorOfMovie(movieStar, rate)) {
+                    responseResult.add(record.get("title").toString());
+                }
                 break;
-            case 9:
+            case "9.0":
                 for(Term term : listTerm) {
                     if(StringUtils.equals(term.nature.toString(), "nnt")) {
                         movieStar = term.word;
@@ -126,18 +143,22 @@ public class QuestionAnswer {
                         rate = Float.parseFloat(term.word);
                     }
                 }
-                result = graphSearch.getBelowScorePersonActorOfMovie(movieStar, rate);
+                for(Record record : graphSearch.getBelowScorePersonActorOfMovie(movieStar, rate)) {
+                    responseResult.add(record.get("title").toString());
+                }
                 break;
-            case 10:
+            case "10.0":
                 for(Term term : listTerm) {
                     if(StringUtils.equals(term.nature.toString(), "nnt")) {
                         movieStar = term.word;
                         break;
                     }
                 }
-                result = graphSearch.getCategoryOfMovieActorByPerson(movieStar);
+                for(Record record : graphSearch.getCategoryOfMovieActorByPerson(movieStar)) {
+                    responseResult.add(record.get("category").toString());
+                }
                 break;
-            case 11:
+            case "11.0":
                 for(Term term : listTerm) {
                     if(StringUtils.equals(term.nature.toString(), "nnt")) {
                         if(StringUtils.isBlank(movieStar)) {
@@ -148,24 +169,28 @@ public class QuestionAnswer {
                         }
                     }
                 }
-                result = graphSearch.getMoviesOfPersonActWithOthers(movieStar, movieOtherStar);
+                for(Record record : graphSearch.getMoviesOfPersonActWithOthers(movieStar, movieOtherStar)) {
+                    responseResult.add(record.get("title").toString());
+                }
                 break;
-            case 12:
+            case "12.0":
                 for(Term term : listTerm) {
                     if(StringUtils.equals(term.nature.toString(), "nnt")) {
                         movieStar = term.word;
                         break;
                     }
                 }
-                result = graphSearch.getCountMovieActorByPerson(movieStar);
+                for(Record record : graphSearch.getCountMovieActorByPerson(movieStar)) {
+                    responseResult.add(record.get("count").toString());
+                }
                 break;
-            case 13: //(暂时没数据)
+            case "13.0": //(暂时没数据)
                 break;
             default:
                 System.out.println("抱歉，不懂你説的什么意思？");
                 break;
         }
-        return result;
+        return responseResult;
     }
 
 }

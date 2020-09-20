@@ -5,10 +5,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import com.hankcs.hanlp.HanLP;
-import com.hankcs.hanlp.seg.Segment;
-import com.hankcs.hanlp.seg.common.Term;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.ml.Pipeline;
@@ -31,10 +27,8 @@ import org.apache.spark.sql.types.StructType;
 public class QuestionClassification implements Serializable {
 
     SparkSession session = null;
-    Segment segment = null;
     public QuestionClassification(SparkSession session) {
         this.session = session;
-        this.segment = HanLP.newSegment().enableCustomDictionaryForcing(true);//强制使用自定义词典
     }
 
     /**
@@ -49,41 +43,21 @@ public class QuestionClassification implements Serializable {
                 new StructField("sentence", DataTypes.StringType, false, Metadata.empty())
         });
 
-        //1
-        JavaRDD<Row> rowJavaRDD = session.read().textFile(trainFile).toJavaRDD().mapPartitions(new FlatMapFunction<Iterator<String>, Row>() {
+        JavaRDD<Row> rowJavaRDD = session.read().textFile(trainFile).repartition(14).toJavaRDD().mapPartitions(new FlatMapFunction<Iterator<String>, Row>() {
             @Override
             public Iterator<Row> call(Iterator<String> input) throws Exception {
                 List<Row> listRow = new ArrayList<>();
                 while(input.hasNext()) {
                     String[] line = input.next().split(",");
-                    int label = Integer.parseInt(line[0]);
+                    Integer label = Integer.valueOf(line[0]);
                     String feature = line[1];
-                    listRow.add(RowFactory.create(label, sentenceSegment(feature)));
+                    listRow.add(RowFactory.create(label, feature));
                 }
                 return listRow.iterator();
             }
         });
+        System.out.println("训练样本数据总数： " + rowJavaRDD.collect().size());
         Dataset<Row> dataset = session.createDataFrame(rowJavaRDD, schema);
-
-        //2
-        /*Encoder<Row> rowEncoder = Encoders.javaSerialization(Row.class);
-        Dataset<Row> dataset = session.read().textFile(trainFile).mapPartitions(new MapPartitionsFunction<String, Row>() {
-            @Override
-            public Iterator<Row> call(Iterator<String> input) throws Exception {
-                List<Row> listRow = new ArrayList<>();
-                while(input.hasNext()) {
-                    String[] line = input.next().split(",");
-                    int label = Integer.parseInt(line[0]);
-                    String feature = line[1];
-                    StringBuffer sb = new StringBuffer();
-                    for(Term term : segment.seg(feature)) {
-                        sb.append(term.word).append(" ");
-                    }
-                    listRow.add(RowFactory.create(label, sb.toString()));
-                }
-                return listRow.iterator();
-            }
-        }, rowEncoder);*/
 
         Tokenizer tokenizer = new Tokenizer()
                 .setInputCol("sentence")
@@ -115,7 +89,7 @@ public class QuestionClassification implements Serializable {
      * @param text
      * @return
      */
-    public int predict(String modelFile, String text) {
+    public double predict(String modelFile, String text) {
         StructType schema = new StructType(new StructField[] {
                 new StructField("sentence", DataTypes.StringType, false, Metadata.empty())
         });
@@ -124,19 +98,6 @@ public class QuestionClassification implements Serializable {
         Dataset<Row> prediction = session.createDataFrame(predictRow, schema);
         PipelineModel model = PipelineModel.load(modelFile);
         Dataset<Row> predictions = model.transform(prediction);
-        return predictions.select("prediction").collectAsList().get(0).getInt(0);
-    }
-
-    /**
-     * 分词
-     * @param text
-     * @return
-     */
-    public String sentenceSegment(String text) {
-        StringBuffer sb = new StringBuffer();
-        for(Term term : segment.seg(text)) {
-            sb.append(term.word).append(" ");
-        }
-        return sb.toString().trim();
+        return predictions.select("prediction").collectAsList().get(0).getDouble(0);
     }
 }

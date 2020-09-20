@@ -17,36 +17,34 @@ import java.util.regex.Matcher;
  * @date 2020/9/7 22:03
  */
 public class QuestionMine {
+    private static Segment segment = null;
+    static {
+        segment = HanLP.newSegment().enableCustomDictionaryForcing(true);//强制使用自定义词典
+    }
 
     /**
      * 抽取人名和电影名
      * @param question
      * @return
      */
-    public  List<Term> extractNer(String question) {
-        Segment segment = HanLP.newSegment().enableCustomDictionaryForcing(true);//强制使用自定义词典
+    public static List<Term> extractNer(String question) {
         List<Term> listTerm = CoreStopWordDictionary.apply(segment.seg(question));
         return listTerm;
     }
 
     /**
-     * 依存关系分析
-     * @param question
+     * 分词
+     * @param text
+     * @return
      */
-    public void sentDependency(String question) {
-        CoNLLSentence sentence = HanLP.parseDependency(question);
-        System.out.println(sentence);
-        System.out.println("----------");
-        CoNLLWord[] wordArray = sentence.getWordArray();
-        for (int i =0; i < wordArray.length; i++)
-        {
-            CoNLLWord word = wordArray[i];
-            System.out.println(word.LEMMA+";"+word.POSTAG+";"+word.HEAD.ID+";"+word.HEAD+";"+word.DEPREL);
-
+    public static String sentenceSegment(String text) {
+        StringBuffer sb = new StringBuffer();
+        for(Term term : segment.seg(text)) {
+            sb.append(term.word).append(" ");
         }
-        System.out.println("----------");
-        System.out.println(HanLP.segment(question));
+        return sb.toString().trim();
     }
+
 }
 
 

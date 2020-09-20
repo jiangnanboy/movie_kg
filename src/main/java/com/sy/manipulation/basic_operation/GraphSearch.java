@@ -25,7 +25,7 @@ public class GraphSearch {
     public List<Record> movieRate(String title) {
         List<Record> listRecord = null;
         try(Session session = driver.session()) {
-            listRecord = session.readTransaction(tx -> tx.run("match (m:Movie) where m.title = $title return m.rate",
+            listRecord = session.readTransaction(tx -> tx.run("match (m:Movie) where m.title = $title return m.rate as rate",
                     Values.parameters("title", title))).list();
         }
         return listRecord;
@@ -39,7 +39,7 @@ public class GraphSearch {
     public List<Record> movieShowtime(String title) {
         List<Record> listRecord = null;
         try(Session session = driver.session()) {
-            listRecord = session.readTransaction(tx -> tx.run("match (m:Movie) where m.title = $title return m.showtime",
+            listRecord = session.readTransaction(tx -> tx.run("match (m:Movie) where m.title = $title return m.showtime as showtime",
                     Values.parameters("title", title))).list();
         }
         return listRecord;
@@ -53,7 +53,7 @@ public class GraphSearch {
     public List<Record> movieCategory(String title) {
         List<Record> listRecord = null;
         try(Session session = driver.session()) {
-            listRecord = session.readTransaction(tx -> tx.run("match (m:Movie) where m.title = $title return m.category",
+            listRecord = session.readTransaction(tx -> tx.run("match (m:Movie) where m.title = $title return m.category as category",
                     Values.parameters("title", title))).list();
         }
         return listRecord;
@@ -67,7 +67,7 @@ public class GraphSearch {
     public List<Record> movieActorOfAllPerson(String title) {
         List<Record> listRecord = null;
         try(Session session = driver.session()) {
-            listRecord = session.readTransaction(tx -> tx.run("MATCH path=(m:Movie)-[r:ACTOR_OF]->(p:Person) where m.title = $title return p",
+            listRecord = session.readTransaction(tx -> tx.run("MATCH path=(m:Movie)-[r:ACTOR_OF]->(p:Person) where m.title = $title return p.name as name",
                     Values.parameters("title", title))).list();
         }
         return listRecord;
@@ -82,7 +82,7 @@ public class GraphSearch {
     public List<Record> personActorOfCategoryMovie(String person, String category) {
         List<Record> listRecord = null;
         try(Session session = driver.session()) {
-            listRecord = session.readTransaction(tx -> tx.run("MATCH path=(m:Movie)-[r:ACTOR_OF]->(p:Person) where p.name=$name and m.category =~'.*{category}.*' return m.title",
+            listRecord = session.readTransaction(tx -> tx.run("MATCH path=(m:Movie)-[r:ACTOR_OF]->(p:Person) where p.name=$name and m.category =~'.*{category}.*' return m.title as title",
                     Values.parameters("name", person, "category", category))).list();
         }
         return listRecord;
@@ -98,7 +98,7 @@ public class GraphSearch {
         List<Record> listRecord = null;
         try (Session session = driver.session()){
             listRecord = session.readTransaction(tx ->
-                    tx.run("match (m:Movie)-[:ACTOR_OF]->(p:Person) where m.rate>$rate and p.name=~'.*{person}.*' return m.title",
+                    tx.run("match (m:Movie)-[:ACTOR_OF]->(p:Person) where m.rate>$rate and p.name=~'.*{person}.*' return m.title as title",
                             Values.parameters("rate", rating, "person", person))).list();
         }
         return listRecord;
@@ -114,7 +114,7 @@ public class GraphSearch {
         List<Record> listRecord = null;
         try (Session session = driver.session()){
             listRecord = session.readTransaction(tx ->
-                    tx.run("match (m:Movie)-[:ACTOR_OF]->(p:Person) where m.rate<$rate and p.name=~'.*{person}.*' return m.title",
+                    tx.run("match (m:Movie)-[:ACTOR_OF]->(p:Person) where m.rate<$rate and p.name=~'.*{person}.*' return m.title as title",
                             Values.parameters("rate", rating, "person", person))).list();
         }
         return listRecord;
@@ -189,7 +189,7 @@ public class GraphSearch {
         List<Record> listRecord = null;
         try (Session session = driver.session()){
             listRecord = session.readTransaction(tx ->
-                    tx.run("match(m:Movie)-[:ACTOR_OF]->(p:Person) where p.name = $name return count(m)",
+                    tx.run("match(m:Movie)-[:ACTOR_OF]->(p:Person) where p.name = $name return count(m) as count",
                             Values.parameters("name", name))).list();
         }
         return listRecord;

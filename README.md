@@ -45,11 +45,15 @@
     DIRECTOR_OF 	    Movie 	    Person 	director.csv 	5015 	电影的导演
     DISTRICT_OF 	    Movie 	    Country 	district.csv 	6227 	电影的制片国家/地区
 
-# graph可视化
+# result
 
 关系图
 
 ![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/movie_graph.png)
+
+问答
+
+![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/reponse_result.png)
 
 # references
 
