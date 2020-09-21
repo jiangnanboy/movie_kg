@@ -187,7 +187,7 @@ public class QuestionAnswer {
             case "13.0": //(暂时没数据)
                 break;
             default:
-                System.out.println("抱歉，不懂你説的什么意思？");
+                System.out.println("真的不好意思，我还小呢，不懂您在説些什么？");
                 break;
         }
         return responseResult;

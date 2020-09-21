@@ -42,8 +42,9 @@ public class MovieQA {
         //对话预测
         Scanner sc = new Scanner(System.in);
         String question = null;
+        System.out.println("小嘉：您好，我是小嘉，请问您想知道些什么呢？");
         while (true) {
-            System.out.println("请输入一个问句：");
+            System.out.print("you：");
             question = sc.nextLine();
             if(StringUtils.equals(question, "exit")) {
                 break;
@@ -62,7 +63,7 @@ public class MovieQA {
                 }
             }
             double label = classification.predict(PropertiesReader.get("modelFile"), sb.toString().trim());
-            System.out.println("预测的类型label为:" + label);
+            //System.out.println("预测的类型label为:" + label);
             QuestionAnswer questionAnswer = new QuestionAnswer(InitNeo4j.getDriver());
             StringBuffer resultLine = new StringBuffer();
             List<String> responseResult = questionAnswer.response(label, listTerm);
@@ -70,7 +71,7 @@ public class MovieQA {
             for(String s : responseResult) {
                 resultLine.append(s).append(" ");
             }
-            System.out.println(resultLine.toString());
+            System.out.println("小嘉：" + resultLine.toString());
         }
         InitNeo4j.closeDriver();
     }

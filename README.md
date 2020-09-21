@@ -45,6 +45,10 @@
     DIRECTOR_OF 	    Movie 	    Person 	director.csv 	5015 	电影的导演
     DISTRICT_OF 	    Movie 	    Country 	district.csv 	6227 	电影的制片国家/地区
 
+# flowchart
+
+![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/flowchart.png)
+
 # result
 
 关系图
