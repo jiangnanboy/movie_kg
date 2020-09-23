@@ -1,7 +1,7 @@
-# douban-movie-kg
+# introduction
     电影知识图谱问答，利用spark，neo4j以及hanlp完成一个简易的电影问答。
     
-# introduction
+# requirement
     利用java-driver方式，使用cypher和apoc构建节点和关系，使用spark完成问句分类。
     1.neo4j3.5.3
     2.apoc3.5.0.13
@@ -69,11 +69,11 @@
 
 # result
 
-关系图
+1.关系图
 
 ![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/movie_graph.png)
 
-问答
+2.问答
 
 ![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/reponse_result.png)
 
