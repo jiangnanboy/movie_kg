@@ -1,6 +1,6 @@
 package com.sy.mainclass;
 
-import com.sy.reco.CBF;
+import com.sy.reco.Recommender;
 import com.sy.util.InitNeo4j;
 
 /**
@@ -9,8 +9,9 @@ import com.sy.util.InitNeo4j;
  */
 public class MovieRec {
     public static void main(String[] args) {
-        CBF cbf = new CBF(InitNeo4j.getDriver());
-        cbf.recommender("建国大业", 10).stream().forEach(title -> System.out.println(title));
+        Recommender rec = new Recommender(InitNeo4j.getDriver());
+        rec.recCBF1("变形金刚3", 10).stream().forEach(title -> System.out.println(title));
+        rec.recCBF2("变形金刚3", 10).stream().forEach(title -> System.out.println(title));
         InitNeo4j.closeDriver();
     }
 }
