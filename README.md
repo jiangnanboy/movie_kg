@@ -47,7 +47,8 @@
             3.提取问答语句中的实体，包括人名和电影名
             4.将问句模板和提取的实体转为cypher或apoc语句进行查询
     
-    三.电影推荐模块待续...
+    三.电影推荐模块(根据电影名称进行相关电影推荐)
+        \src\main\java\com\sy\mainclass\movieRec
     
 # data
     主要数据在resources中，数据中包含(数据来源http://www.openkg.cn/dataset/douban-movie-kg)
