@@ -68,17 +68,17 @@
 
 # flowchart
 
-![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/flowchart.png)
+![image](https://raw.githubusercontent.com/jiangnanboy/movie_kg/tree/master/image/flowchart.png)
 
 # result
 
 1.关系图
 
-![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/movie_graph.png)
+![image](https://raw.githubusercontent.com/jiangnanboy/movie_kg/tree/master/image/movie_graph.png)
 
 2.问答
 
-![image](https://github.com/jiangnanboy/movie_kg/tree/master/image/reponse_result.png)
+![image](https://raw.githubusercontent.com/jiangnanboy/movie_kg/tree/master/image/reponse_result.png)
 
 # references
 
