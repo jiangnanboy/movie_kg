@@ -10,22 +10,24 @@
     5.spark3.0
 
 # quick start
-    一.创建节点和关系，这里提供两种方法，分别用cypher和apoc构建。
+    一.节点和关系构建模块
+        这里提供两种方法，分别用cypher和apoc构建。
 	    1.cypher构建node与relation(较慢，一个一个语句create)
 	        \src\main\java\com\sy\mainclass\GraphCypherBuild.java
 	        (1).构建节点
-	        createNode(driver);
+	        createNode();
 	        (2).构建关系
-            createRelation(driver);
+            createRelation();
         
         2.apoc批量构建node与relation(建议利用apoc构建，不需要stop neo4j，速度和数据量中等)
             \src\main\java\com\sy\mainclass\GraphApocBuild.java
             (1).构建节点
-            createNode(driver);
+            createNode();
             (2).构建关系
-            createRelation(driver);
+            createRelation();
         
-    二.意图识别为以下几类(样本较少，可以增加更多的数据以提高识别精度)：
+    二.问答模块
+        意图识别为以下几类(样本较少，可以增加更多的数据以提高识别精度)：
         * 0:电影评分
         * 1:电影上映时间
         * 2:电影类型
@@ -47,8 +49,12 @@
             3.提取问答语句中的实体，包括人名和电影名
             4.将问句模板和提取的实体转为cypher或apoc语句进行查询
     
-    三.电影推荐模块(根据电影名称进行相关电影推荐)
-        \src\main\java\com\sy\mainclass\movieRec
+    三.推荐模块
+        \src\main\java\com\sy\mainclass\movieRec.java
+        1.根据相同的演员或导演，返回top-n评分的电影
+          recCBF1()
+        2.根据电影的类型进行推荐，返回topn评分的电影
+          recCBF2()
     
 # data
     主要数据在resources中，数据中包含(数据来源http://www.openkg.cn/dataset/douban-movie-kg)
