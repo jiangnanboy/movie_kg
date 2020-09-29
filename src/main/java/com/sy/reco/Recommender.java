@@ -20,7 +20,7 @@ public class Recommender {
     }
 
     /**
-     * 推荐相似电影，根据相同的演员或导演，返回top-n评分的电影
+     * 根据相同的演员或导演，返回top-n评分的电影
      * @param movieTitle
      * @param topn
      * @return
@@ -59,4 +59,5 @@ public class Recommender {
             }
         return result;
     }
+    
 }

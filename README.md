@@ -50,11 +50,15 @@
             4.将问句模板和提取的实体转为cypher或apoc语句进行查询
     
     三.推荐模块
-        \src\main\java\com\sy\mainclass\movieRec.java
+        \src\main\java\com\sy\mainclass\MovieRec.java
         1.根据相同的演员或导演，返回top-n评分的电影
           recCBF1()
         2.根据电影的类型进行推荐，返回topn评分的电影
           recCBF2()
+    
+    四.搜索模块
+        \src\main\java\com\sy\mainclass\MovieSearch.java
+        
     
 # data
     主要数据在resources中，数据中包含(数据来源http://www.openkg.cn/dataset/douban-movie-kg)

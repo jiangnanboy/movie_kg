@@ -10,8 +10,9 @@ import com.sy.util.InitNeo4j;
 public class MovieRec {
     public static void main(String[] args) {
         Recommender rec = new Recommender(InitNeo4j.getDriver());
-        rec.recCBF1("变形金刚3", 10).stream().forEach(title -> System.out.println(title));
-        rec.recCBF2("变形金刚3", 10).stream().forEach(title -> System.out.println(title));
+        rec.recCBF1("泰坦尼克号", 10).stream().forEach(title -> System.out.println(title));
+        System.out.println("------------------");
+        rec.recCBF2("泰坦尼克号", 10).stream().forEach(title -> System.out.println(title));
         InitNeo4j.closeDriver();
     }
 }
