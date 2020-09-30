@@ -58,6 +58,9 @@
     
     四.搜索模块
         \src\main\java\com\sy\mainclass\MovieSearch.java
+        1.返回类型为category，评分最高的前10部电影名称
+          getMostRatedScoreMovie()
+        
         
     
 # data
