@@ -51,7 +51,6 @@ public class QuestionAnswer {
         String movieStar = null; // 演员名称
         String movieOtherStar = null; //另一个演员
         float rate = 0.0f; //评分
-        Search graphSearch = new Search(driver);
         String questionType = String.valueOf(label);
         switch (questionType) {
             case "0.0":
