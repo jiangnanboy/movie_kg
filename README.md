@@ -5,9 +5,10 @@
     利用java-driver方式，使用cypher和apoc构建节点和关系，使用spark完成问句分类。
     1.neo4j3.5.3
     2.apoc3.5.0.13
-    3.jdk1.8
-    4.hanlp1.7.7 下载data(包括dictionary和model，配置hanlp.properties路径)放在resources目录下即可
-    5.spark3.0
+    3.algo-3.5.4.0
+    4.jdk1.8
+    5.hanlp1.7.7 下载data(包括dictionary和model，配置hanlp.properties路径)放在resources目录下即可
+    6.spark3.0
 
 # quick start
     一.节点和关系构建模块

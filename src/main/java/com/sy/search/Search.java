@@ -23,14 +23,19 @@ public class Search {
      * @param name
      * @return
      */
-    public List<Record> findPerson(String name) {
+    public List<String> findPerson(String name) {
+        List<String> result = new ArrayList<>();
         List<Record> listRecord = null;
         try (Session session = driver.session()){
             listRecord = session.readTransaction(tx ->
                     tx.run("match(p:Person) where p.name = $name return p.name as name,p.id as id",
                             Values.parameters("name", name))).list();
         }
-        return listRecord;
+        if(0 != listRecord.size())
+            for(Record record : listRecord){
+                result.add(record.get("name").toString() + " : " + record.get("id").toString());
+            }
+        return result;
     }
 
     /**
@@ -38,14 +43,19 @@ public class Search {
      * @param title
      * @return
      */
-    public List<Record> findMovie(String title) {
+    public List<String> findMovie(String title) {
+        List<String> result = new ArrayList<>();
         List<Record> listRecord = null;
         try (Session session = driver.session()){
             listRecord = session.readTransaction(tx ->
                     tx.run("match(m:Movie) where m.title = $title return m.title as title, m.category as category,m.language as language,m.rate as rate,m.showtime as time,m.length as length",
                             Values.parameters("title", title))).list();
         }
-        return listRecord;
+        if(0 != listRecord.size())
+            for(Record record : listRecord){
+                result.add(record.get("title").toString() + " : " + record.get("category").toString() + " : " + record.get("language").toString() + " : " + record.get("rate").toString() + " : " + record.get("time").toString() + " : " + record.get("length").toString());
+            }
+        return result;
     }
 
     /**
@@ -53,14 +63,19 @@ public class Search {
      * @param name
      * @return
      */
-    public List<Record> findCountry(String name){
+    public List<String> findCountry(String name){
+        List<String> result = new ArrayList<>();
         List<Record> listRecord = null;
         try (Session session = driver.session()){
             listRecord = session.readTransaction(tx ->
                     tx.run("match(c:Country) where c.name = $name return c.name as name,c.id as id",
                             Values.parameters("name", name))).list();
         }
-        return listRecord;
+        if(0 != listRecord.size())
+            for(Record record : listRecord){
+                result.add(record.get("name").toString() + " : " + record.get("id").toString());
+            }
+        return result;
     }
 
     /**
@@ -68,14 +83,19 @@ public class Search {
      * @param name
      * @return
      */
-    public List<Record> movieComposerByPerson(String name) {
+    public List<String> movieComposerByPerson(String name) {
+        List<String> result = new ArrayList<>();
         List<Record> listRecord = null;
         try (Session session = driver.session()){
             listRecord = session.readTransaction(tx ->
                     tx.run("match(m:Movie)-[:composer]->(p:Person{name:$name}) return p.name as name,m.title as title",
                             Values.parameters("name", name))).list();
         }
-        return listRecord;
+        if(0 != listRecord.size())
+            for(Record record : listRecord){
+                result.add(record.get("name").toString() + " : " + record.get("title").toString());
+            }
+        return result;
     }
 
     /**
@@ -83,14 +103,19 @@ public class Search {
      * @param name
      * @return
      */
-    public List<Record> movieDirectorByPerson(String name) {
+    public List<String> movieDirectorByPerson(String name) {
+        List<String> result = new ArrayList<>();
         List<Record> listRecord = null;
         try (Session session = driver.session()){
             listRecord = session.readTransaction(tx ->
                     tx.run("match(m:Movie)-[:director]->(p:Person{name:$name}) return p.name as name,m.title as title",
                             Values.parameters("name", name))).list();
         }
-        return listRecord;
+        if(0 != listRecord.size())
+            for(Record record : listRecord){
+                result.add(record.get("name").toString() + " : " + record.get("title").toString());
+            }
+        return result;
     }
 
     /**
@@ -98,14 +123,19 @@ public class Search {
      * @param name
      * @return
      */
-    public List<Record> movieDistrictByCountry(String name) {
+    public List<String> movieDistrictByCountry(String name) {
+        List<String> result = new ArrayList<>();
         List<Record> listRecord = null;
         try (Session session = driver.session()){
             listRecord = session.readTransaction(tx ->
                     tx.run("match(m:Movie)-[:district]->(c:Country{name:$name}) return c.name as name,m.title as title",
                             Values.parameters("name", name))).list();
         }
-        return listRecord;
+        if(0 != listRecord.size())
+            for(Record record : listRecord){
+                result.add(record.get("name").toString() + " : " + record.get("title").toString());
+            }
+        return result;
     }
 
     /**
@@ -113,14 +143,19 @@ public class Search {
      * @param name
      * @return
      */
-    public List<Record> personActWithOthers(String name) {
-        List<Record> lisRecord = null;
+    public List<String> personActWithOthers(String name) {
+        List<String> result = new ArrayList<>();
+        List<Record> listRecord = null;
         try(Session session = driver.session()) {
-            lisRecord = session.readTransaction(tx ->
+            listRecord = session.readTransaction(tx ->
                     tx.run("match(p:Person{name:$name})<-[:ACTOR_OF]-(m:Movie)-[:ACTOR_OF]->(other:Person) return m.title as title,other.name as name",
                             Values.parameters("name", name))).list();
         }
-        return lisRecord;
+        if(0 != listRecord.size())
+            for(Record record : listRecord){
+                result.add(record.get("title").toString() + " : " + record.get("name").toString());
+            }
+        return result;
     }
 
     /**
