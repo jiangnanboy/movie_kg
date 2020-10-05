@@ -10,7 +10,7 @@
     5.hanlp1.7.7 下载data(包括dictionary和model，配置hanlp.properties路径)放在resources目录下即可
     6.spark3.0
     7.neo4j-java-driver1.7.1
-    8.neo4j-graph-data-science-1.1.6-standalone(gds算法库[包含algo算法库])
+    8.neo4j-graph-data-science-1.1.6-standalone(gds算法库[包含algo算法库]，两个库不兼容)
 
 # quick start
     一.节点和关系构建模块

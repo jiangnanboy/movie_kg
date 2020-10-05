@@ -1,7 +1,6 @@
 package com.sy.qa;
 
 import com.hankcs.hanlp.seg.common.Term;
-import com.sy.search.Search;
 import org.apache.commons.lang.StringUtils;
 import org.neo4j.driver.v1.Driver;
 import org.neo4j.driver.v1.Record;
