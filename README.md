@@ -5,12 +5,12 @@
     利用java-driver方式，使用cypher和apoc构建节点和关系，使用spark完成问句分类。
     1.neo4j3.5.22
     2.apoc3.5.0.13-all
-    3.algo-3.5.4.0
+    3.algo-3.5.4.0(图算法库)
     4.jdk1.8
     5.hanlp1.7.7 下载data(包括dictionary和model，配置hanlp.properties路径)放在resources目录下即可
     6.spark3.0
     7.neo4j-java-driver1.7.1
-    8.neo4j-graph-data-science-1.1.6-standalone(gds算法库[包含algo算法库]，两个库不兼容)
+    8.neo4j-graph-data-science-1.1.6-standalone(图算法库gds[包含algo算法库]，两个库不兼容)
 
 # quick start
     一.节点和关系构建模块
