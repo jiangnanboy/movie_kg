@@ -1,5 +1,5 @@
 # introduction
-    电影知识图谱问答，利用spark，neo4j以及hanlp完成一个简易的电影问答。
+    电影知识图谱问答，利用spark，neo4j以及hanlp完成一个简易的电影问答系统，java实现。
     
 # requirement
     利用java-driver方式，使用cypher和apoc构建节点和关系，使用spark完成问句分类。
